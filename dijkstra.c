@@ -115,10 +115,12 @@ void dijkstra(matrix_t *matrix, maze_t *maze){
             if(visited[j] != 1 && matrix->adjMatrix[currNode][j] && dist[currNode] != INF &&dist[currNode] + matrix->adjMatrix[currNode][j] < dist[j]){
                 dist[j] = dist[currNode] + matrix->adjMatrix[currNode][j];
                 predecessor[j] = currNode;
+                if(j == endNode)    //if reached end node
+                    goto END;       //stop processing algorithm
             }
         
     }
-
+    END: 
     printSolution(endNode, startNode, dist, predecessor, matrix->n);
     free(visited);
     free(dist);   
